@@ -1,12 +1,8 @@
 package com.banco.comercio.apiblog.domain.service.impl;
 
-import com.banco.comercio.apiblog.adapters.rest.dto.ClientWebDTO;
+import com.banco.comercio.apiblog.adapters.postgres.models.UserEntity;
 import com.banco.comercio.apiblog.adapters.rest.dto.CreateUserWebDTO;
 import com.banco.comercio.apiblog.adapters.rest.dto.UserWebDTO;
-import com.banco.comercio.apiblog.domain.dto.ClientDTO;
-import com.banco.comercio.apiblog.domain.entities.Client;
-import com.banco.comercio.apiblog.domain.entities.User;
-import com.banco.comercio.apiblog.domain.exception.NotFoundException;
 import com.banco.comercio.apiblog.domain.persistence_ports.UserPersistence;
 import com.banco.comercio.apiblog.domain.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -34,47 +30,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserWebDTO createClient(CreateUserWebDTO clientWebDTO) {
-        return userPersistence.create(clientWebDTO);
-    }
+    public UserWebDTO createUser(CreateUserWebDTO createUserWebDTO) {
+        UserEntity user = new UserEntity();
+        user.setName(createUserWebDTO.getName());
+        user.setCellPhone(createUserWebDTO.getCellPhone());
+        user.setUsername(createUserWebDTO.getUsername());
+        user.setPassword(createUserWebDTO.getPassword());
 
-    /*@Override
-    public ClientWebDTO createClient(ClientWebDTO clientWebDTO) {
-        var client = Client.builder().address(clientWebDTO.getAddress())
-                .email(clientWebDTO.getEmail())
-                .cellPhone(clientWebDTO.getCellPhone())
-                .name(clientWebDTO.getName())
-                .lastName(clientWebDTO.getLastName()).build();
-
-
-        return Client.toCreateClientDTO(clientRepository.save(client));
+        return userPersistence.create(user).toUserWebDTO();
     }
 
     @Override
-    public ClientDTO updateClient(Long id ,ClientWebDTO clientWebDTO) {
+    public UserWebDTO updateUser(Long id, CreateUserWebDTO clientWebDTO) {
 
-        var clientOpt = clientRepository.findById(id).orElseThrow(()-> new NotFoundException("Client not found with this Id : " + id));
-
-            clientOpt.setName(clientWebDTO.getName());
-            clientOpt.setCellPhone(clientWebDTO.getCellPhone());
-            clientOpt.setLastName(clientWebDTO.getLastName());
-            clientOpt.setEmail(clientWebDTO.getEmail());
-
-        return Client.toClientDTO(clientRepository.save(clientOpt));
+        var user = userPersistence.findById(id);
+        user.setUsername(clientWebDTO.getUsername());
+        user.setCellPhone(clientWebDTO.getCellPhone());
+        return user.toUserWebDTO();
     }
 
     @Override
-    public Optional<ClientDTO> findClientById(Long id) {
-        var client = clientRepository.findById(id);
-        if (client.isEmpty()) {
-            throw new NotFoundException("Client with this id : " + id + " not found");
-        }
-        return Optional.ofNullable(Client.toClientDTO(client.get()));
+    public Optional<UserWebDTO> findUserById(Long id) {
+
+        var user = userPersistence.findById(id);
+        return Optional.of(user.toUserWebDTO());
     }
 
     @Override
-    public void deleteClient(Long id) {
-        clientRepository.deleteById(id);
+    public void deleteUser(Long id) {
+        userPersistence.delete(id);
+    }
 
-    }*/
 }

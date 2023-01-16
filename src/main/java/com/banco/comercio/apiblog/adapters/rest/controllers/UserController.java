@@ -1,9 +1,8 @@
 package com.banco.comercio.apiblog.adapters.rest.controllers;
 
+import com.banco.comercio.apiblog.adapters.rest.dto.CreateUserWebDTO;
 import com.banco.comercio.apiblog.adapters.rest.dto.UserWebDTO;
 import com.banco.comercio.apiblog.adapters.rest.facade.ClientFacade;
-import com.banco.comercio.apiblog.adapters.rest.dto.ClientWebDTO;
-import com.banco.comercio.apiblog.domain.dto.ClientDTO;
 import com.banco.comercio.apiblog.domain.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -31,61 +30,61 @@ public class UserController {
     }
 
     @GetMapping
-/*    @Operation(method = "getClients", summary = "list of clients", description = "Get list of clients", tags = {"client",})
+    @Operation(method = "getUsers", summary = "list of clients", description = "Get list of users", tags = {"user",})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Clone created", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = ClientDTO.class))}),
-            @ApiResponse(responseCode = "500", description = "An error occured.", content = @Content)})*/
-    public ResponseEntity<List<UserWebDTO>> getClients() {
+            @ApiResponse(responseCode = "200", description = "Get users", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = UserWebDTO.class))}),
+            @ApiResponse(responseCode = "500", description = "An error occured.", content = @Content)})
+    public ResponseEntity<List<UserWebDTO>> getUsers() {
         var result = userService.findAll();
         return ResponseEntity.ok(result);
     }
 
     @PostMapping
-    /*@Operation(method = "createClient", summary = "create clients", description = "create client", tags = {"client",})
+    @Operation(method = "createUser", summary = "create users", description = "create users", tags = {"user",})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Client created", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = ClientDTO.class))}),
-            @ApiResponse(responseCode = "500", description = "An error occured.", content = @Content)})*/
-    public ResponseEntity<ClientDTO> createClient(@Valid @RequestBody ClientWebDTO clientWebDTO) {
-        //var result = userService.c(clientWebDTO);
-        return null;
+            @ApiResponse(responseCode = "201", description = "User created", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = UserWebDTO.class))}),
+            @ApiResponse(responseCode = "500", description = "An error occured.", content = @Content)})
+    public ResponseEntity<UserWebDTO> createUser(@Valid @RequestBody CreateUserWebDTO createUserWebDTO) {
+        var result = userService.createUser(createUserWebDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-   /* @GetMapping(value = "/{id}")
-    @Operation(method = "getClientById", summary = "get client", description = "Get client by Id", tags = {"client",})
+    @GetMapping(value = "/{id}")
+    @Operation(method = "getUserById", summary = "get user", description = "Get user by Id", tags = {"user",})
+
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "find Client", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = ClientDTO.class))}),
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = UserWebDTO.class))}),
             @ApiResponse(responseCode = "404", description = "Item not Found.", content = @Content)})
-    public ResponseEntity<ClientDTO> getClientById(@Parameter(name = "id", description = "Client Identifier", required = true) @PathVariable Long id) {
-        var result = clientFacade.findClientById(id);
-        return result.map(clientDTO -> ResponseEntity.ok().body(clientDTO))
+    public ResponseEntity<UserWebDTO> getUserById(@Parameter(name = "id", description = "User Identifier", required = true) @PathVariable Long id) {
+        var result = userService.findUserById(id);
+        return result.map(createUserWebDTO -> ResponseEntity.ok().body(createUserWebDTO))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
 
-
     @PutMapping(value = "/{id}")
-    @Operation(method = "updateClient", summary = "update clients", description = "update client by Id", tags = {"client",})
+    @Operation(method = "updateUser", summary = "update users", description = "update user by Id", tags = {"user",})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Client Updated Sucessfully", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = ClientDTO.class))}),
+            @ApiResponse(responseCode = "201", description = "User Updated Sucessfully", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = UserWebDTO.class))}),
             @ApiResponse(responseCode = "500", description = "An error occured.", content = @Content)})
-    public ResponseEntity<ClientDTO> updateClient(@Parameter(name = "id", description = "Client Identifier", required = true)
-                                                  @PathVariable Long id, @RequestBody ClientWebDTO clientWebDTO) {
-        var result = clientFacade.updateClient(id, clientWebDTO);
+    public ResponseEntity<UserWebDTO> updateClient(@Parameter(name = "id", description = "User Identifier", required = true)
+                                                   @PathVariable Long id, @RequestBody CreateUserWebDTO createUserWebDTO) {
+        var result = userService.updateUser(id, createUserWebDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @DeleteMapping(value = "/{id}")
-    @Operation(method = "deleteClientById", summary = "delete client", description = "delete client By Id", tags = {"client",})
+    @Operation(method = "deleteUserById", summary = "delete user", description = "delete user By Id", tags = {"user",})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Client deleted"),
-            @ApiResponse(responseCode = "404", description = "Client not Found.")})
-    public ResponseEntity<Void> deleteClientById(@Parameter(name = "id", description = "Client Identifier", required = true) @PathVariable Long id) {
-        clientFacade.deleteClient(id);
+            @ApiResponse(responseCode = "200", description = "User deleted"),
+            @ApiResponse(responseCode = "404", description = "User not Found.")})
+    public ResponseEntity<Void> deleteUserById(@Parameter(name = "id", description = "User Identifier", required = true) @PathVariable Long id) {
+        userService.deleteUser(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }*/
+    }
 
 }

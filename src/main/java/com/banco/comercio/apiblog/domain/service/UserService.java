@@ -13,13 +13,13 @@ public interface UserService {
 
     List<UserWebDTO> findAll();
 
-    UserWebDTO createClient(CreateUserWebDTO clientWebDTO);
+    UserWebDTO createUser(CreateUserWebDTO clientWebDTO);
 
-    ClientDTO updateClient(Long id, ClientWebDTO clientWebDTO);
+    UserWebDTO updateUser(Long id, CreateUserWebDTO clientWebDTO);
 
-    Optional<ClientDTO> findClientById(Long id);
+    Optional<UserWebDTO> findUserById(Long id);
 
-    void deleteClient(Long id);*/
+    void deleteUser(Long id);
 
 
 }

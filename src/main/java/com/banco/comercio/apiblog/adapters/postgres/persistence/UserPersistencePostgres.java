@@ -22,14 +22,14 @@ public class UserPersistencePostgres implements UserPersistence {
 
     private final UserRepository userRepository;
     @Override
-    public UserEntity create(UserEntity post) {
+    public UserEntity create(UserEntity user) {
             /*var data = CreateUserWebDTO.builder()
                     .name(post.getName())
                     .lastName(post.getLastName())
                     .password(post.getPassword())
                     .username(post.getUsername()).build();*/
 
-        return userRepository.save(post);
+        return userRepository.save(user);
     }
 
     @Override
@@ -39,8 +39,8 @@ public class UserPersistencePostgres implements UserPersistence {
 
     @Override
     public void delete(Long id) {
-        var post = findById(id);
-        userRepository.delete(post);
+        var user = findById(id);
+        userRepository.delete(user);
     }
 
     @Override

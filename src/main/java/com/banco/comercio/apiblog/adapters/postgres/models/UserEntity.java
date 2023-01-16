@@ -1,7 +1,7 @@
 package com.banco.comercio.apiblog.adapters.postgres.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.banco.comercio.apiblog.adapters.rest.dto.UserWebDTO;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -23,4 +23,14 @@ public class UserEntity extends BaseEntity {
 
     @OneToMany(mappedBy="user")
     private List<PostEntity> posts;
+
+    public UserWebDTO toUserWebDTO() {
+        return UserWebDTO.builder()
+                .name(name)
+                .lastName(lastName)
+                .cellPhone(cellPhone)
+                .username(username).build();
+
+
+    }
 }
