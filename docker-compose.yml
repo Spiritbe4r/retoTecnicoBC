@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  apiblog:
+    image: apiblog
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    container_name: apiblog
+    depends_on:
+      - dbpostgres
+          
+  dbpostgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=cardenascode
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=blogdb
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
