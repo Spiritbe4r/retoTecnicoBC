@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository("userPersistence")
@@ -53,6 +54,11 @@ public class UserPersistencePostgres implements UserPersistence {
     public UserEntity update(Long id, UserEntity user) {
         var data = findById(id);
         return userRepository.save(data);
+    }
+
+    @Override
+    public Optional<UserEntity> findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
 

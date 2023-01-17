@@ -27,8 +27,8 @@ public class PostPersistencePostgres implements PostPersistence {
     }
 
     @Override
-    public List<PostEntity> getAll() {
-        return postRepository.findAll();
+    public List<PostEntity> getAllByUser(String username) {
+        return postRepository.getPostEntitiesByUser(username);
     }
 
     @Override

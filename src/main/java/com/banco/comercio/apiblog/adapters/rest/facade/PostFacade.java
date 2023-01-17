@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface PostFacade {
 
-    List<PostWebDTO> findAll();
+    List<PostWebDTO> findPostsByUser(String username);
 
-    PostWebDTO createPost(CreatePostWebDTO createPostWebDTO);
+    PostWebDTO createPost(String username , CreatePostWebDTO createPostWebDTO);
 
     PostWebDTO updatePost(Long id ,CreatePostWebDTO clientWebDTO);
 

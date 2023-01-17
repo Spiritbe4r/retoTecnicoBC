@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface UserService {
 
     List<UserWebDTO> findAll();
-
+   /* Optional<UserWebDTO> findUserByUsername(String username);*/
     UserWebDTO createUser(CreateUserWebDTO clientWebDTO);
 
     UserWebDTO updateUser(Long id, CreateUserWebDTO clientWebDTO);

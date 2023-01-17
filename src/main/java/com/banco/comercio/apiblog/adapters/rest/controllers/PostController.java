@@ -10,15 +10,17 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
+import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/posts")
+@RequestMapping(value = "/api/v1/posts")
 public class PostController {
 
     private final PostFacade postFacade;
@@ -34,9 +36,9 @@ public class PostController {
             @ApiResponse(responseCode = "200", description = "Get posts", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = PostWebDTO.class))}),
             @ApiResponse(responseCode = "500", description = "An error occured.", content = @Content)})
-    public ResponseEntity<List<PostWebDTO>> getUsers() {
-
-        return ResponseEntity.ok(postFacade.findAll());
+    public ResponseEntity<List<PostWebDTO>> getUserPosts(Principal principal) {
+        var username= principal.getName();
+        return ResponseEntity.ok(postFacade.findPostsByUser(username));
     }
 
    @PostMapping
@@ -45,8 +47,8 @@ public class PostController {
             @ApiResponse(responseCode = "201", description = "User created", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = PostWebDTO.class))}),
             @ApiResponse(responseCode = "500", description = "An error occured.", content = @Content)})
-    public ResponseEntity<PostWebDTO> createUser(@Valid @RequestBody CreatePostWebDTO createPostWebDTO) {
-        var result = postFacade.createPost(createPostWebDTO);
+    public ResponseEntity<PostWebDTO> createPostUser(@Valid @RequestBody CreatePostWebDTO createPostWebDTO, Principal principal) {
+        var result = postFacade.createPost(principal.getName(),createPostWebDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 

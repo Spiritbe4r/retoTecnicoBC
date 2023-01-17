@@ -1,25 +1,42 @@
 package com.banco.comercio.apiblog.adapters.postgres.models;
 
+import com.banco.comercio.apiblog.adapters.rest.dto.UserResponseDTO;
 import com.banco.comercio.apiblog.adapters.rest.dto.UserWebDTO;
+import com.banco.comercio.apiblog.config.enums.UserRoles;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
-public class UserEntity extends BaseEntity {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserEntity extends BaseEntity  {
 
     private String cellPhone;
     private String name;
     private String lastName;
-
     private String username;
+
+    private String email;
     private String password;
+
+    private Boolean enabled=true;
+
+    //@ElementCollection
+    private List<UserRoles> roles;
 
     @OneToMany(mappedBy="user")
     private List<PostEntity> posts;
@@ -33,4 +50,13 @@ public class UserEntity extends BaseEntity {
 
 
     }
+
+    public UserResponseDTO toUserResponseDTO() {
+        return UserResponseDTO.builder().id(getId())
+                .email(email)
+                .name(name)
+                .lastName(lastName)
+                .roles(roles.stream().toList()).build();
+    }
+
 }

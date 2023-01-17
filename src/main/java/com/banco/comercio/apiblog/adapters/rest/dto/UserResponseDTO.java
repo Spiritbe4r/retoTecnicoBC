@@ -1,21 +1,22 @@
 package com.banco.comercio.apiblog.adapters.rest.dto;
 
+
 import com.banco.comercio.apiblog.config.enums.UserRoles;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
 @Getter
-@Setter
 @Builder
-public class UserWebDTO {
+public class UserResponseDTO {
 
-    private String cellPhone;
+    private Long id;
     private String name;
     private String lastName;
     private String username;
     private String email;
-    private List<UserRoles> roles;
+    private Boolean enabled;
+    private List<UserRoles> roles ;
+
 }

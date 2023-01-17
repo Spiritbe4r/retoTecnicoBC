@@ -25,9 +25,17 @@ public class UserServiceImpl implements UserService {
                 .map(x->UserWebDTO.builder().username(x.getUsername())
                         .cellPhone(x.getCellPhone())
                         .lastName(x.getLastName())
-                        .name(x.getName()).build())
+                        .email(x.getEmail())
+                        .name(x.getName())
+                        .roles(x.getRoles())
+                        .build())
                 .collect(Collectors.toList());
     }
+
+    /*@Override
+    public Optional<UserWebDTO> findUserByUsername(String username) {
+        return userPersistence.findUserByUsername(username);
+    }*/
 
     @Override
     public UserWebDTO createUser(CreateUserWebDTO createUserWebDTO) {

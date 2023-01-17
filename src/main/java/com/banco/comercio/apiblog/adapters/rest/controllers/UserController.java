@@ -10,15 +10,16 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/api/v1/users")
 public class UserController {
 
     private final PostFacade postFacade;
@@ -29,7 +30,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/list")
     @Operation(method = "getUsers", summary = "list of clients", description = "Get list of users", tags = {"user",})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Get users", content = {
@@ -40,7 +41,7 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping
+   /* @PostMapping
     @Operation(method = "createUser", summary = "create users", description = "create users", tags = {"user",})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = {
@@ -49,7 +50,7 @@ public class UserController {
     public ResponseEntity<UserWebDTO> createUser(@Valid @RequestBody CreateUserWebDTO createUserWebDTO) {
         var result = userService.createUser(createUserWebDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
-    }
+    }*/
 
     @GetMapping(value = "/{id}")
     @Operation(method = "getUserById", summary = "get user", description = "Get user by Id", tags = {"user",})

@@ -12,7 +12,7 @@ public interface PostPersistence {
     PostEntity create(PostEntity classification);
 
     void delete(Long id);
-    List<PostEntity> getAll();
+    List<PostEntity> getAllByUser(String username);
 
     PostEntity findById(Long id);
     PostEntity update(Long id, PostEntity classification);

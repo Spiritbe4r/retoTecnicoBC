@@ -1,5 +1,6 @@
 package com.banco.comercio.apiblog.domain.service;
 
+import com.banco.comercio.apiblog.adapters.postgres.models.UserEntity;
 import com.banco.comercio.apiblog.adapters.rest.dto.CreatePostWebDTO;
 import com.banco.comercio.apiblog.adapters.rest.dto.PostWebDTO;
 import com.banco.comercio.apiblog.domain.entities.Post;
@@ -9,9 +10,9 @@ import java.util.Optional;
 
 public interface PostService {
 
-    List<Post> findAll();
+    List<Post> findAll(String username);
 
-    Post createPost(CreatePostWebDTO postWebDTO);
+    Post createPost(String username, CreatePostWebDTO postWebDTO);
 
     Post updatePost(Long id, CreatePostWebDTO postWebDTO);
 
