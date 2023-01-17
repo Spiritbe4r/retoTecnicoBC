@@ -5,7 +5,7 @@ import com.banco.comercio.apiblog.adapters.rest.dto.LoginDto;
 import com.banco.comercio.apiblog.adapters.rest.dto.UserDTO;
 import com.banco.comercio.apiblog.adapters.rest.dto.UserResponseDTO;
 
-public interface UserFacade {
+public interface AuthFacade {
     UserResponseDTO createUser(UserDTO categoryDTO);
 
     AuthResponse login(LoginDto categoryDTO);

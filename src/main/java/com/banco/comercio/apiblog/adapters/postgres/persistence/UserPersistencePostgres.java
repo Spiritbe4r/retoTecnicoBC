@@ -24,11 +24,7 @@ public class UserPersistencePostgres implements UserPersistence {
     private final UserRepository userRepository;
     @Override
     public UserEntity create(UserEntity user) {
-            /*var data = CreateUserWebDTO.builder()
-                    .name(post.getName())
-                    .lastName(post.getLastName())
-                    .password(post.getPassword())
-                    .username(post.getUsername()).build();*/
+
 
         return userRepository.save(user);
     }

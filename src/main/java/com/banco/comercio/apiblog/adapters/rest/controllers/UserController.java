@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/users")
+@RequestMapping(value = UserController.USER_ENDPOINT)
 public class UserController {
 
+    public static final String USER_ENDPOINT = "/api/v1/users";
     private final PostFacade postFacade;
     private final UserService userService;
 
@@ -41,16 +42,6 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-   /* @PostMapping
-    @Operation(method = "createUser", summary = "create users", description = "create users", tags = {"user",})
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User created", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = UserWebDTO.class))}),
-            @ApiResponse(responseCode = "500", description = "An error occured.", content = @Content)})
-    public ResponseEntity<UserWebDTO> createUser(@Valid @RequestBody CreateUserWebDTO createUserWebDTO) {
-        var result = userService.createUser(createUserWebDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
-    }*/
 
     @GetMapping(value = "/{id}")
     @Operation(method = "getUserById", summary = "get user", description = "Get user by Id", tags = {"user",})

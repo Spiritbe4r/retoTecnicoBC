@@ -12,6 +12,7 @@ import java.util.List;
 @Builder
 public class UserWebDTO {
 
+    private Long id;
     private String cellPhone;
     private String name;
     private String lastName;
