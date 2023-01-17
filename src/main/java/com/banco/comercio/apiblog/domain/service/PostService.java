@@ -16,7 +16,7 @@ public interface PostService {
 
     Post updatePost(Long id, CreatePostWebDTO postWebDTO);
 
-    Optional<Post> findPostById(Long id);
+    Optional<Post> findPostById(Long id, String username);
 
     void deletePost(Long id);
 

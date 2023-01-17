@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,8 +50,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Optional<Post> findPostById(Long id) {
-        return Optional.of(postPersistence.findById(id).toPost());
+    public Optional<Post> findPostById(Long id,String username) {
+        return postPersistence.getAllByUser(username)
+                        .stream().filter(x->x.getId().equals(id)).map(PostEntity::toPost).findFirst();
     }
 
     @Override

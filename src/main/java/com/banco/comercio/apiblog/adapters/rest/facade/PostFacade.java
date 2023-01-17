@@ -14,7 +14,7 @@ public interface PostFacade {
 
     PostWebDTO updatePost(Long id ,CreatePostWebDTO clientWebDTO);
 
-    Optional<PostWebDTO> findPostById(Long id);
+    Optional<PostWebDTO> findPostById(Long id,String username);
 
     void deletePost(Long id);
 }

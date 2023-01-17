@@ -42,8 +42,8 @@ public class PostFacadeImpl implements PostFacade {
     }
 
     @Override
-    public Optional<PostWebDTO> findPostById(Long id) {
-        return postService.findPostById(id).map(Post::toPostWebDTO);
+    public Optional<PostWebDTO> findPostById(Long id,String username) {
+        return postService.findPostById(id,username).map(Post::toPostWebDTO);
     }
 
     @Override

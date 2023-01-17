@@ -58,8 +58,8 @@ public class PostController {
             @ApiResponse(responseCode = "200", description = "find Post", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = PostWebDTO.class))}),
             @ApiResponse(responseCode = "404", description = "Item not Found.", content = @Content)})
-    public ResponseEntity<PostWebDTO> getPostById(@Parameter(name = "id", description = "Post Identifier", required = true) @PathVariable Long id) {
-        var result = postFacade.findPostById(id);
+    public ResponseEntity<PostWebDTO> findPostByUserAndPostId(@Parameter(name = "id", description = "Post Identifier", required = true) @PathVariable Long id,Principal principal) {
+        var result = postFacade.findPostById(id ,principal.getName());
         return result.map(createUserWebDTO -> ResponseEntity.ok().body(createUserWebDTO))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }

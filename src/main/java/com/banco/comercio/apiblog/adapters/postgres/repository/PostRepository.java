@@ -12,4 +12,7 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<PostEntity,Long> {
     @Query(value = "SELECT pe FROM PostEntity pe JOIN pe.user u WHERE  u.username = :username")
     List<PostEntity> getPostEntitiesByUser(@Param("username") String username);
+
+   /* @Query(value = "SELECT pe FROM PostEntity pe JOIN pe.user u WHERE pe.id=:postId  and u.username = :username")
+    PostEntity getPostEntitiesByUser(@Param("postId") String postId,@Param("username") String username);*/
 }
