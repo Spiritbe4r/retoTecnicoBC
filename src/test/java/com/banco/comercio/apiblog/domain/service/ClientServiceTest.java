@@ -1,22 +1,7 @@
 package com.banco.comercio.apiblog.domain.service;
 
-import com.banco.comercio.apiblog.adapters.rest.dto.ClientWebDTO;
-import com.banco.comercio.apiblog.domain.service.impl.UserServiceImpl;
-import com.banco.comercio.apiblog.domain.dto.ClientDTO;
-import com.banco.comercio.apiblog.domain.entities.Client;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
-
-import java.util.List;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
 
 class ClientServiceTest {
 

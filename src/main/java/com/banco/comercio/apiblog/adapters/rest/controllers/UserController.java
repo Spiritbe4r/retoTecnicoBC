@@ -2,7 +2,7 @@ package com.banco.comercio.apiblog.adapters.rest.controllers;
 
 import com.banco.comercio.apiblog.adapters.rest.dto.CreateUserWebDTO;
 import com.banco.comercio.apiblog.adapters.rest.dto.UserWebDTO;
-import com.banco.comercio.apiblog.adapters.rest.facade.ClientFacade;
+import com.banco.comercio.apiblog.adapters.rest.facade.PostFacade;
 import com.banco.comercio.apiblog.domain.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,11 +21,11 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserController {
 
-    private final ClientFacade clientFacade;
+    private final PostFacade postFacade;
     private final UserService userService;
 
-    public UserController(ClientFacade clientFacade, UserService userService) {
-        this.clientFacade = clientFacade;
+    public UserController(PostFacade postFacade, UserService userService) {
+        this.postFacade = postFacade;
         this.userService = userService;
     }
 
@@ -53,7 +53,6 @@ public class UserController {
 
     @GetMapping(value = "/{id}")
     @Operation(method = "getUserById", summary = "get user", description = "Get user by Id", tags = {"user",})
-
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "find Client", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = UserWebDTO.class))}),

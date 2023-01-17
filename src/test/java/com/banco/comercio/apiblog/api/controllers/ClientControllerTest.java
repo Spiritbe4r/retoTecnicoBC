@@ -1,6 +1,6 @@
 package com.banco.comercio.apiblog.api.controllers;
 
-import com.banco.comercio.apiblog.domain.repository.ClientRepository;
+//import com.banco.comercio.apiblog.domain.repository.ClientRepository;
 import com.banco.comercio.apiblog.domain.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class ClientControllerTest {
 
-    private static ClientRepository clientRepository;
-    private static UserService userService;
-    private MockMvc mockMvc;
+    //private static ClientRepository clientRepository;
+  /*  private static UserService userService;
+    private MockMvc mockMvc;*/
     @Autowired
     private ObjectMapper objectMapper;
     private static final String BASE_URL = "http://localhost:8080/clients";

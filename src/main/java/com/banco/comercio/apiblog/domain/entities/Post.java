@@ -1,14 +1,8 @@
 package com.banco.comercio.apiblog.domain.entities;
 
-import com.banco.comercio.apiblog.adapters.postgres.models.BaseEntity;
-import com.banco.comercio.apiblog.adapters.postgres.models.UserEntity;
+import com.banco.comercio.apiblog.adapters.rest.dto.PostWebDTO;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 
 @Getter
@@ -17,5 +11,11 @@ public class Post {
 
     private String title;
     private String content;
+
+    public PostWebDTO toPostWebDTO() {
+        return PostWebDTO.builder().content(content)
+                .title(title).build();
+
+    }
 
 }

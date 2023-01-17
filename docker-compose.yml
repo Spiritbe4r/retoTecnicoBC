@@ -3,6 +3,8 @@ version: '3.4'
 services:
   apiblog:
     image: apiblog
+    networks:
+      - blog-pgsql
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -13,16 +15,20 @@ services:
       - dbpostgres
           
   dbpostgres:
-    container_name: postgres
+    container_name: db_postgres
     image: postgres:latest
+    networks:
+      - blog-pgsql
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=cardenascode
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=blogdb
+      POSTGRES_USER: cardenascode
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: blogdb
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 10s
       timeout: 5s
       retries: 5
+networks:
+  blog-pgsql:
