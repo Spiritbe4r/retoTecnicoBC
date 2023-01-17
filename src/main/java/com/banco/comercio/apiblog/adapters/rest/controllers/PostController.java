@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -72,8 +73,8 @@ public class PostController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = PostWebDTO.class))}),
             @ApiResponse(responseCode = "500", description = "An error occured.", content = @Content)})
     public ResponseEntity<PostWebDTO> updatetPost(@Parameter(name = "id", description = "Post Identifier", required = true)
-                                                   @PathVariable Long id, @RequestBody CreatePostWebDTO createUserWebDTO) {
-        var result = postFacade.updatePost(id, createUserWebDTO);
+                                                   @PathVariable Long id, @RequestBody CreatePostWebDTO createUserWebDTO, Principal principal) {
+        var result = postFacade.updatePost(id, createUserWebDTO ,principal.getName());
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 

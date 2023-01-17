@@ -37,8 +37,8 @@ public class PostFacadeImpl implements PostFacade {
     }
 
     @Override
-    public PostWebDTO updatePost(Long id, CreatePostWebDTO clientWebDTO) {
-        return postService.updatePost(id, clientWebDTO).toPostWebDTO();
+    public PostWebDTO updatePost(Long id, CreatePostWebDTO clientWebDTO,String username) {
+        return postService.updatePost(id, clientWebDTO,username).toPostWebDTO();
     }
 
     @Override

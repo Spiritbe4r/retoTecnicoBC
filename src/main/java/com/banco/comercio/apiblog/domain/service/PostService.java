@@ -14,7 +14,7 @@ public interface PostService {
 
     Post createPost(String username, CreatePostWebDTO postWebDTO);
 
-    Post updatePost(Long id, CreatePostWebDTO postWebDTO);
+    Post updatePost(Long id, CreatePostWebDTO postWebDTO,String username);
 
     Optional<Post> findPostById(Long id, String username);
 

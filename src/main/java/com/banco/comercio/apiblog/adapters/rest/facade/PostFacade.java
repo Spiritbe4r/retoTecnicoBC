@@ -12,7 +12,7 @@ public interface PostFacade {
 
     PostWebDTO createPost(String username , CreatePostWebDTO createPostWebDTO);
 
-    PostWebDTO updatePost(Long id ,CreatePostWebDTO clientWebDTO);
+    PostWebDTO updatePost(Long id ,CreatePostWebDTO clientWebDTO,String username);
 
     Optional<PostWebDTO> findPostById(Long id,String username);
 

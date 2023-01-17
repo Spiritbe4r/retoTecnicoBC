@@ -42,7 +42,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post updatePost(Long id, CreatePostWebDTO postWebDTO) {
+    public Post updatePost(Long id, CreatePostWebDTO postWebDTO,String username) {
+        var postByUser = postPersistence.findById(id).getUser().getUsername().equals(username);
+        if(!postByUser){
+            throw new RuntimeException("Solo el usuario que creo el post puede actualizarlo");
+        }
         var post = postPersistence.findById(id);
         post.setTitle(postWebDTO.title());
         post.setContent(postWebDTO.content());
